@@ -7,8 +7,10 @@ import lombok.Setter;
 @Getter
 public class Park {
     private Attraction attraction;
+    private String namePark;
 
-    public Park(String nameAttraction, String workingHours, int price) {
+    public Park(String namePark, String nameAttraction, String workingHours, int price) {
+        this.namePark = namePark;
         attraction = new Attraction(nameAttraction, workingHours, price);
     }
 
