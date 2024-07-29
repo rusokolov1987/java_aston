@@ -20,12 +20,12 @@ public class Person {
 
     @Override
     public String toString() {
-        return "LastName: " + this.LastName +
-                "\nFirstName: " + this.FirstName +
-                "\nMiddleName: " + this.MiddleName +
-                "\nJobTitle: " + this.jobTitle +
-                "\nemail: " + this.email +
-                "\nphone: " + this.phoneNumber +
-                "\nsalary: " + this.salary;
+        return "Фамилия: " + this.LastName +
+                "\nИмя: " + this.FirstName +
+                "\nОтчество: " + this.MiddleName +
+                "\nДолжность: " + this.jobTitle +
+                "\nЭл. почта: " + this.email +
+                "\nТелфон: " + this.phoneNumber +
+                "\nЗарплата: " + this.salary;
     }
 }
