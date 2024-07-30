@@ -1,21 +1,32 @@
-package org.example;
+package org.example.lesson_5;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+import java.util.ArrayList;
+
+@Data
 public class Park {
-    private Attraction attraction;
     private String namePark;
+    private Attraction attraction;
+    private ArrayList<Attraction> attractions;
+
+    public Park(String namePark) {
+        this.namePark = namePark;
+        attractions = new ArrayList<>();
+    }
 
     public Park(String namePark, String nameAttraction, String workingHours, int price) {
         this.namePark = namePark;
         attraction = new Attraction(nameAttraction, workingHours, price);
+        attractions = new ArrayList<>();
+        attractions.add(attraction);
     }
 
-    @Setter
-    @Getter
+    public void setAttractions(Attraction attraction) {
+        attractions.add(attraction);
+    }
+
+    @Data
     public class Attraction {
         private String nameAttraction;
         private String workingHours;
@@ -28,7 +39,8 @@ public class Park {
         }
 
         public void showAttractionInfo() {
-            System.out.println("Атракцион: " + this.nameAttraction +
+            System.out.println("Парк: " + namePark +
+                    "\nАтракцион: " + this.nameAttraction +
                     "\nВремя работы: " + this.workingHours +
                     "\nСтоимость: " + this.price);
         }
