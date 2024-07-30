@@ -22,7 +22,7 @@ public class Park {
         attractions.add(attraction);
     }
 
-    public void setAttractions(Attraction attraction) {
+    public void addAttraction(Attraction attraction) {
         attractions.add(attraction);
     }
 
