@@ -8,5 +8,8 @@ public class Main {
         persons[2] = new Person("Петрова", "Лариса", "Сергеевна", "оператор атракциона", "test_3@mail.ru", "89114443324", 20000, 52);
         persons[3] = new Person("Сергеев", "Сергей", "Сергеевич", "дворник", "test_4@mail.ru", "89114443325", 20000, 57);
         persons[4] = new Person("Трунов", "Алексей", "Иванович", "сторож", "test_5@mail.ru", "89114443326", 20000, 59);
+        for (Person i : persons) {
+            System.out.println(i.toString());
+        }
     }
 }
