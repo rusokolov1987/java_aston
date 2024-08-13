@@ -6,9 +6,9 @@ public class Main {
         Dog rex = new Dog("Rex");
         Cat vasya = new Cat("Vasya");
 
-        System.out.println("Количество собак = " + Dog.getcountDog());
-        System.out.println("Количество котов = " + Cat.getCountCat());
-        System.out.println("Количество животных = " + Animal.getCountAnimal());
+        System.out.println("Количество собак = " + Dog.countDog);
+        System.out.println("Количество котов = " + Cat.countCat);
+        System.out.println("Количество животных = " + Animal.countAnimal);
 
         Bowl bowl = new Bowl();
         bowl.addFood(5);
@@ -21,8 +21,8 @@ public class Main {
             System.out.println(cat);
         }
 
-        System.out.println("Количество собак = " + Dog.getcountDog());
-        System.out.println("Количество котов = " + Cat.getCountCat());
-        System.out.println("Количество животных = " + Animal.getCountAnimal());
+        System.out.println("Количество собак = " + Dog.countDog);
+        System.out.println("Количество котов = " + Cat.countCat);
+        System.out.println("Количество животных = " + Animal.countAnimal);
     }
 }

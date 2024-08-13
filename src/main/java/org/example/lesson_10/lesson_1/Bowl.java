@@ -7,7 +7,11 @@ public class Bowl {
     }
 
     public Bowl(int countFood) {
-        this.countFood = countFood;
+        if (countFood <= 10) {
+            this.countFood = countFood;
+        } else {
+            System.out.println("В миске недостаточно места!");
+        }
     }
 
     public void addFood(int count) {

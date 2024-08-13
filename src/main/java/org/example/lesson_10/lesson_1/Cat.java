@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class Cat extends Animal {
-    private static int countCat;
+    private String name;
+    public static int countCat;
     private boolean full;
     private int stomachVolume;
 
@@ -18,7 +19,7 @@ public class Cat extends Animal {
     @Override
     public void run(int distance) {
         if (distance <= 200) {
-            System.out.println(name + " пробежал " + distance + " метров");
+            System.out.println(getName() + " пробежал " + distance + " метров");
         } else {
             System.out.println("Да ну его! Отдохну!");
         }
@@ -56,12 +57,8 @@ public class Cat extends Animal {
         return full;
     }
 
-    public static int getCountCat() {
-        return countCat;
-    }
-
     @Override
     public String toString() {
-        return "Кот " + name + ((full) ? " сыт, но лишней порцайки не бывает!" : " голоден, раб!");
+        return "Кот " + getName() + ((full) ? " сыт, но лишней порцайки не бывает!" : " голоден, раб!");
     }
 }

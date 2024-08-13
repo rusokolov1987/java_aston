@@ -1,7 +1,8 @@
 package org.example.lesson_10.lesson_1;
 
 public class Dog extends Animal {
-    private static int countDog;
+    private String name;
+    public static int countDog;
 
     public Dog(String name) {
         super();
@@ -25,9 +26,5 @@ public class Dog extends Animal {
         } else {
             System.out.println(name + " пошел ко дну! :(");
         }
-    }
-
-    public static int getcountDog() {
-        return countDog;
     }
 }
