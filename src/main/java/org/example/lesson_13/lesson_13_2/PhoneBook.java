@@ -2,6 +2,8 @@ package org.example.lesson_13.lesson_13_2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class PhoneBook {
     private HashMap<String, String> phones;
@@ -16,7 +18,8 @@ public class PhoneBook {
 
     public ArrayList<String> get(String lastName) {
         ArrayList<String> numbers = new ArrayList<>();
-        for (var element : phones.entrySet()) {
+        Set<Map.Entry<String, String>> entries = phones.entrySet();
+        for (Map.Entry<String, String> element : entries) {
             if (element.getValue().equals(lastName)) {
                 numbers.add(element.getKey());
             }
