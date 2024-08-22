@@ -1,11 +1,18 @@
 package org.example.lesson_13.lesson_13_1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Main {
     public static void main(String[] args) {
         String[] words = {"Hello", "World", "Hello", "Java", "Car", "Fish", "Car", "Dog", "Animal", "Elephant", "Dog",
                 "Car", "Coffee", "Tea", "Coffee", "Car", "Cat", "Animal", "Elephant", "Java"};
+
+        /* Уникальный список (можно и через цикл)*/
+        HashSet<String> set = new HashSet<>(Arrays.asList(words));
+        System.out.println(set);
 
         /* Используем HashMap для хранения уникальных ключей и хранения повторяющихся ключей в значениях. */
         HashMap<String, Integer> map = new HashMap<>();
