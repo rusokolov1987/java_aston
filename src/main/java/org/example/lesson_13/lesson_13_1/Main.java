@@ -1,6 +1,5 @@
 package org.example.lesson_13.lesson_13_1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
