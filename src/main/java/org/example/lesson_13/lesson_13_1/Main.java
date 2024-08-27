@@ -1,5 +1,6 @@
 package org.example.lesson_13.lesson_13_1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,6 +13,19 @@ public class Main {
         /* Уникальный список (можно и через цикл)*/
         HashSet<String> set = new HashSet<>(Arrays.asList(words));
         System.out.println(set);
+
+        /* Через цикл */
+
+        ArrayList<String> list = new ArrayList<>();
+        for (String word : words) {
+            if (!list.contains(word)) {
+                list.add(word);
+            }
+        }
+
+        for (String item : list) {
+            System.out.println(item);
+        }
 
         /* Используем HashMap для хранения уникальных ключей и хранения повторяющихся ключей в значениях. */
         HashMap<String, Integer> map = new HashMap<>();
