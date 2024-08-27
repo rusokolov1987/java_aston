@@ -1,30 +1,35 @@
 package org.example.lesson_13.lesson_13_2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import org.example.lesson_13.lesson_13_2.exception.NotFoundLastName;
+
+import java.util.*;
 
 public class PhoneBook {
-    private HashMap<String, String> phones;
+    private HashMap<String, ArrayList<String>> phones;
 
     public PhoneBook() {
         phones = new HashMap<>();
     }
 
     public void add(String numberPhone, String lastName) {
-        phones.put(numberPhone, lastName);
+        if (phones.containsKey(lastName)) {
+            ArrayList<String> listNumbers = phones.get(lastName);
+            if (!listNumbers.contains(numberPhone)) {
+                listNumbers.add(numberPhone);
+                phones.put(lastName, listNumbers);
+            }
+        } else {
+            ArrayList<String> listNumbers = new ArrayList<>();
+            listNumbers.add(numberPhone);
+            phones.put(lastName, listNumbers);
+        }
     }
 
-    public ArrayList<String> get(String lastName) {
-        ArrayList<String> numbers = new ArrayList<>();
-        Set<Map.Entry<String, String>> entries = phones.entrySet();
-        for (Map.Entry<String, String> element : entries) {
-            if (element.getValue().equals(lastName)) {
-                numbers.add(element.getKey());
-            }
+    public ArrayList<String> get(String lastName) throws NotFoundLastName {
+        if (phones.containsKey(lastName)) {
+            return phones.get(lastName);
         }
-        return numbers;
+        throw new NotFoundLastName("В телефонном справочнике нет телефонов на имя " + lastName);
     }
 
     @Override

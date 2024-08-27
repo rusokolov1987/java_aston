@@ -10,15 +10,16 @@ public class Main {
         String[] words = {"Hello", "World", "Hello", "Java", "Car", "Fish", "Car", "Dog", "Animal", "Elephant", "Dog",
                 "Car", "Coffee", "Tea", "Coffee", "Car", "Cat", "Animal", "Elephant", "Java"};
 
-        /* Уникальный список (можно и через цикл)*/
-        HashSet<String> set = new HashSet<>(Arrays.asList(words));
-        System.out.println(set);
-
-        /* Через цикл */
-
+        /* Находим уникальные слова в массиве и выводим их в список */
         ArrayList<String> list = new ArrayList<>();
         for (String word : words) {
-            if (!list.contains(word)) {
+            int count = 0;
+            for (int i = 0; i < words.length; i++) {
+                if (word.equals(words[i])) {
+                    count++;
+                }
+            }
+            if (count == 1) {
                 list.add(word);
             }
         }
