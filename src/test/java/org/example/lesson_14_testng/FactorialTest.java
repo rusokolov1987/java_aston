@@ -16,16 +16,30 @@ public class FactorialTest {
         factorial = new Factorial();
     }
 
-    @DataProvider
+    @DataProvider(name = "getTestData")
     public Object[][] getTestData() {
         return new Object[][] {
-                {"5", 120},
-                {"-5", new InvalidValue("Отрицательное число")},
-                {},
+                {"5", "120"},
+                {"-12", "Введено отрицательное число!"},
+                {"1.2", "Введено дробное число!"},
+                {null, "Введен NULL!"},
+                {"5a", "Введено не число!"}
         };
     }
 
-    @Test
-    public void testGetFactorial() {
+    @Test(dataProvider = "getTestData")
+    public void testGetFactorial(String data, String expected) {
+        int actual = 0;
+        boolean isException = false;
+        try {
+            actual = factorial.getFactorial(data);
+        } catch (InvalidValue e) {
+            isException = true;
+        }
+        if (isException) {
+            assertTrue(isException);
+        } else {
+            assertEquals(Integer.parseInt(expected), actual);
+        }
     }
 }
