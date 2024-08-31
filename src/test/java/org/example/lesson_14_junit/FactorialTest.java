@@ -24,6 +24,18 @@ class FactorialTest {
     }
 
     @Test
+    @DisplayName("Факторил 5 не соотвутствует ожидаемому результату.")
+    public void whenIncorrectResul() throws InvalidValue {
+        int expected = 120;
+        int actual = factorial.getFactorial("5");
+        boolean isIncorrectResult = true;
+        if (actual != expected) {
+            isIncorrectResult = false;
+        }
+        assertTrue(isIncorrectResult);
+    }
+
+    @Test
     @DisplayName("Передача в метод отрицательного числа")
     public void whenAddNegativeNumbersThenThrowInvalidValue() {
         boolean isException = false;
