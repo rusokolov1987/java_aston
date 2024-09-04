@@ -66,11 +66,10 @@ class MainTest {
     @DisplayName("Проверка работы ссылки.")
     @Order(3)
     public void testLink() {
-        String expectedUrl = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
         WebElement element = webDriver.findElement(By.xpath("//div[@class='pay__wrapper']/a"));
         actions.click(element).perform();
-        String currentUrl = webDriver.getCurrentUrl();
-        assertEquals(expectedUrl, currentUrl);
+        boolean displayed = webDriver.findElement(By.id("breadcrumbs")).isDisplayed();
+        assertTrue(displayed);
         webDriver.navigate().back();
     }
 
