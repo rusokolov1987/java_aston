@@ -58,7 +58,7 @@ class MainTest {
         webDriver.findElement(By.id("connection-email")).sendKeys("test@ya.ru");
         Actions actions = new Actions(webDriver);
         actions.click(webDriver.findElement(By.xpath("//div[@class='pay__forms']//button"))).perform();
-        boolean isDisabled = webDriver.findElement(By.xpath("//div[@class='app-wrapper]")).isDisplayed();
+        boolean isDisabled = webDriver.findElement(By.xpath("//div[@class='app-wrapper']")).isDisplayed();
         assertTrue(isDisabled);
     }
 
