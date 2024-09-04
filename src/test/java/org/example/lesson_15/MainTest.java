@@ -39,10 +39,10 @@ class MainTest {
     @DisplayName("Проверка наличия логотипов платежных систем.")
     @Order(2)
     public void testLogoPaymentSystem() {
-        List<WebElement> elements = webDriver.findElements(By.xpath("//div[@class='pay__partners']/ul"));
+        List<WebElement> elements = webDriver.findElements(By.xpath("//div[@class='pay__partners']/ul/li/img"));
         boolean isDisplayed = true;
         for (WebElement element : elements) {
-            if (!element.isDisplayed()) {
+            if (element.getAttribute("src").isEmpty()) {
                 isDisplayed = false;
             }
         }
