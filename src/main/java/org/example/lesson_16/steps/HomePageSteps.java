@@ -1,15 +1,20 @@
 package org.example.lesson_16.steps;
 
 import org.example.lesson_16.DTO.OnlinePaymentPageDTO;
+import org.example.lesson_16.DTO.OnlinePaymentPopUpDTO;
 import org.example.lesson_16.pages.HomePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 
 public class HomePageSteps {
     private final HomePage homePage = new HomePage();
     private final HomePage.OnlinePaymentPage onlinePaymentPage = new HomePage.OnlinePaymentPage();
+    private final HomePage.OnlinePaymentPopUp onlinePaymentPopUp = new HomePage.OnlinePaymentPopUp();
 
     public void scrollToPaymentSection() {
         WebElement paymentSection = homePage.getOnlinePaymentPage();
@@ -61,5 +66,68 @@ public class HomePageSteps {
 
     public void clickButton() {
         onlinePaymentPage.getButton().click();
+    }
+
+    public void fillCardNumber(String cardNumber) {
+        onlinePaymentPopUp.getCarNumber().sendKeys(cardNumber);
+    }
+
+    public void fillValidityPeriod(String validityPeriod) {
+        onlinePaymentPopUp.getValidityPeriod().sendKeys(validityPeriod);
+    }
+
+    public void fillSecretCode(String secretCode) {
+        onlinePaymentPopUp.getSecretCode().sendKeys(secretCode);
+    }
+
+    public void fillHolderName(String holderName) {
+        onlinePaymentPopUp.getHolderName().sendKeys(holderName);
+    }
+
+    public void fillPaymentPopUp(OnlinePaymentPopUpDTO onlinePaymentPopUpDTO) {
+        fillCardNumber(onlinePaymentPopUpDTO.getCardNumber());
+        fillSecretCode(onlinePaymentPopUpDTO.getSecretCode());
+        fillValidityPeriod(onlinePaymentPopUpDTO.getValidityPeriod());
+        fillHolderName(onlinePaymentPopUpDTO.getHolderName());
+    }
+
+    public void switchToFramePopUp() {
+        webDriver.switchTo().frame(onlinePaymentPopUp.getFramePopUp());
+    }
+
+    public String getTextPopUpTitle() {
+        return onlinePaymentPopUp.getTotalTitle().getText();
+    }
+
+    public String getTextPopUpButton() {
+        return onlinePaymentPopUp.getPopUpButton().getText();
+    }
+
+    public String getTextPopUp() {
+        return onlinePaymentPopUp.getPhoneText().getText();
+    }
+
+    public String getCardNumberText() {
+        return onlinePaymentPopUp.getLabelCardNumber().getText();
+    }
+
+    public String getValidityPeriodText() {
+        return onlinePaymentPopUp.getLabelValidityPeriod().getText();
+    }
+
+    public String getSecretCodeText() {
+        return onlinePaymentPopUp.getLabelSecretCode().getText();
+    }
+
+    public String getHolderNameText() {
+        return onlinePaymentPopUp.getLabelHolderName().getText();
+    }
+
+    public ArrayList<String> getSrcCardBrands() {
+        ArrayList<String> list = new ArrayList<>();
+        for (WebElement cardBrand : onlinePaymentPopUp.getCardBrands()) {
+            list.add(cardBrand.getAttribute("src"));
+        }
+        return list;
     }
 }
