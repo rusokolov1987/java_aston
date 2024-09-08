@@ -31,7 +31,7 @@ public class OnlinePaymentPopUpTest {
         webDriver.get("https://www.mts.by/");
         actions = new Actions(webDriver);
         actions.click(webDriver.findElement(By.id("cookie-agree"))).perform();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
         OnlinePaymentPageDTO onlinePaymentPageDTO = OnlinePaymentPageDTO.builder()
                 .paymentType("Услуги связи")
                 .specialField("297777777")
@@ -47,6 +47,10 @@ public class OnlinePaymentPopUpTest {
 
     static Stream<String> providerLogo() {
         return Stream.of("visa-system.svg", "mastercard-system.svg", "belkart-system.svg", "mir-system-ru.svg", "maestro-system.svg");
+    }
+
+    static Stream<String> providerPlaceholder() {
+        return Stream.of("Некорректный номер карты", "Исправьте срок действия", "Введите CVC-код", "Введите имя и фамилию как указано на карте");
     }
 
     @ParameterizedTest
@@ -69,53 +73,39 @@ public class OnlinePaymentPopUpTest {
     }
 
     @ParameterizedTest
-    @DisplayName("Проверка placeholder в поле номер карты.")
-    @CsvSource({"Некорректный номер карты"})
+    @DisplayName("Проверка подсказок в незаполненных полях.")
+    @MethodSource("providerPlaceholder")
     @Order(3)
-    public void testCardNumberPlaceholder(String placeholder) {
-        steps.clickCardNumber();
-        steps.clickOff();
-        boolean contains = steps.getCardNumberText().contains(placeholder);
-        assertTrue(contains);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Проверка placeholder в поле CVC.")
-    @CsvSource({"Введите CVC-код"})
-    @Order(4)
-    public void testSecretCodePlaceholder(String placeholder) {
-        steps.clickSecretCode();
-        steps.clickOff();
-        boolean contains = steps.getSecretCodeText().contains(placeholder);
-        assertTrue(contains);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Проверка placeholder в поле срок действия карты.")
-    @CsvSource({"Исправьте срок действия"})
-    @Order(5)
-    public void testValidityPeriodPlaceholder(String placeholder) {
-        steps.clickValidityPeriod();
-        steps.clickOff();
-        boolean contains = steps.getValidityPeriodText().contains(placeholder);
-        assertTrue(contains);
-    }
-
-    @ParameterizedTest
-    @DisplayName("Проверка placeholder в поле имя держателя карты.")
-    @CsvSource({"Введите имя и фамилию как указано на карте"})
-    @Order(6)
-    public void testHolderNamePlaceholder(String placeholder) {
-        steps.clickHolderName();
-        steps.clickOff();
-        boolean contains = steps.getHolderNameText().contains(placeholder);
+    public void testPlaceholder(String placeholder) {
+        boolean contains = false;
+        switch (placeholder) {
+            case "Некорректный номер карты":
+                steps.clickCardNumber();
+                steps.clickOff();
+                contains = steps.getCardNumberText().contains(placeholder);
+                break;
+            case "Исправьте срок действия":
+                steps.clickValidityPeriod();
+                steps.clickOff();
+                contains = steps.getValidityPeriodText().contains(placeholder);
+                break;
+            case "Введите CVC-код":
+                steps.clickSecretCode();
+                steps.clickOff();
+                contains = steps.getSecretCodeText().contains(placeholder);
+                break;
+            case "Введите имя и фамилию как указано на карте":
+                steps.clickHolderName();
+                steps.clickOff();
+                contains = steps.getHolderNameText().contains(placeholder);
+        }
         assertTrue(contains);
     }
 
     @ParameterizedTest
     @DisplayName("Проверка логотипов")
     @MethodSource("providerLogo")
-    @Order(10)
+    @Order(4)
     public void testMaestro(String cardBrand) {
         boolean contains = isCheck(cardBrand);
         assertTrue(contains);
@@ -124,7 +114,7 @@ public class OnlinePaymentPopUpTest {
     @ParameterizedTest
     @CsvSource({"2200 2407 0118 3630, 03 / 26, 200, SEMEN SEMENOV"})
     @DisplayName("Прверка корректного отображения суммы на кнопке в pop-up.")
-    @Order(11)
+    @Order(5)
     public void testTotalViewButtonPopUp(String cardNumber, String validityPeriod, String secretCode, String holderName) {
         OnlinePaymentPopUpDTO onlinePaymentPopUpDTO = OnlinePaymentPopUpDTO.builder()
                 .cardNumber(cardNumber)
