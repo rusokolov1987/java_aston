@@ -53,29 +53,32 @@ public class OnlinePaymentPopUpTest {
         return Stream.of("Некорректный номер карты", "Исправьте срок действия", "Введите CVC-код", "Введите имя и фамилию как указано на карте");
     }
 
-    @ParameterizedTest
-    @Order(1)
-    @DisplayName("Прверка корректного отображения суммы в заголовке pop-up.")
-    @CsvSource({"200"})
-    public void testTotalViewTitlePopUp(String total) {
-        boolean contains = steps.getTextPopUpTitle().contains(total);
-        assertTrue(contains);
+    static Stream<String> provider() {
+        return Stream.of("Сумма 200", "Телефон 297777777");
     }
 
     @ParameterizedTest
-    @Order(2)
-    @DisplayName("Прверка корректного отображения телефона в заголовке pop-up")
-    @CsvSource({"297777777"})
-    public void testPhoneNumber(String phoneNumber) {
-        String textPopUp = steps.getTextPopUp();
-        boolean contains = textPopUp.contains(phoneNumber);
+    @DisplayName("Проверка корректного отображения суммы и телефона в заголовке")
+    @MethodSource("provider")
+    @Order(1)
+    public void testTotalAndPhoneView(String value) {
+        boolean contains = false;
+        String[] values = value.split(" ");
+        switch (values[0]) {
+            case "Сумма":
+                contains = steps.getTextPopUpTitle().contains(values[1]);
+                break;
+            case "Телефон":
+                contains = steps.getTextPopUp().contains(values[1]);
+                break;
+        }
         assertTrue(contains);
     }
 
     @ParameterizedTest
     @DisplayName("Проверка подсказок в незаполненных полях.")
     @MethodSource("providerPlaceholder")
-    @Order(3)
+    @Order(2)
     public void testPlaceholder(String placeholder) {
         boolean contains = false;
         switch (placeholder) {
@@ -105,7 +108,7 @@ public class OnlinePaymentPopUpTest {
     @ParameterizedTest
     @DisplayName("Проверка логотипов")
     @MethodSource("providerLogo")
-    @Order(4)
+    @Order(3)
     public void testMaestro(String cardBrand) {
         boolean contains = isCheck(cardBrand);
         assertTrue(contains);
@@ -114,7 +117,7 @@ public class OnlinePaymentPopUpTest {
     @ParameterizedTest
     @CsvSource({"2200 2407 0118 3630, 03 / 26, 200, SEMEN SEMENOV"})
     @DisplayName("Прверка корректного отображения суммы на кнопке в pop-up.")
-    @Order(5)
+    @Order(4)
     public void testTotalViewButtonPopUp(String cardNumber, String validityPeriod, String secretCode, String holderName) {
         OnlinePaymentPopUpDTO onlinePaymentPopUpDTO = OnlinePaymentPopUpDTO.builder()
                 .cardNumber(cardNumber)
