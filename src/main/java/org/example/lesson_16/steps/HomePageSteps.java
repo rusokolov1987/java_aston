@@ -7,7 +7,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 

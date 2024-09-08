@@ -70,7 +70,7 @@ public class OnlinePaymentPopUpTest {
 
     @ParameterizedTest
     @DisplayName("Проверка placeholder в поле номер карты.")
-    @CsvSource({"Номер карты"})
+    @CsvSource({"Некорректный номер карты"})
     @Order(3)
     public void testCardNumberPlaceholder(String placeholder) {
         boolean contains = steps.getCardNumberText().contains(placeholder);
@@ -79,7 +79,7 @@ public class OnlinePaymentPopUpTest {
 
     @ParameterizedTest
     @DisplayName("Проверка placeholder в поле CVC.")
-    @CsvSource({"CVC"})
+    @CsvSource({"Введите CVC-код"})
     @Order(4)
     public void testSecretCodePlaceholder(String placeholder) {
         boolean contains = steps.getSecretCodeText().contains(placeholder);
@@ -88,7 +88,7 @@ public class OnlinePaymentPopUpTest {
 
     @ParameterizedTest
     @DisplayName("Проверка placeholder в поле срок действия карты.")
-    @CsvSource({"Срок действия"})
+    @CsvSource({"Исправьте срок действия"})
     @Order(5)
     public void testValidityPeriodPlaceholder(String placeholder) {
         String validityPeriodText = steps.getValidityPeriodText();
@@ -98,7 +98,7 @@ public class OnlinePaymentPopUpTest {
 
     @ParameterizedTest
     @DisplayName("Проверка placeholder в поле имя держателя карты.")
-    @CsvSource({"Имя держателя (как на карте)"})
+    @CsvSource({"Введите имя и фамилию как указано на карте"})
     @Order(6)
     public void testHolderNamePlaceholder(String placeholder) {
         boolean contains = steps.getHolderNameText().contains(placeholder);

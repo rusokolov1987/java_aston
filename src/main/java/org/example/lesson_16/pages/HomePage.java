@@ -85,10 +85,10 @@ public class HomePage {
         private final By secretCode = By.xpath("//input[@name='verification_value']");
         private final By holderName = By.xpath("//div[@class='content ng-tns-c46-3']/input");
         private final By popupButton = By.xpath("//button[@class='colored']");
-        private final By labelCardNumber = By.xpath("//label[@class='ng-tns-c46-1 ng-star-inserted']");
-        private final By labelValidityPeriod = By.xpath("//label[@class='ng-tns-c46-4 ng-star-inserted']");
-        private final By labelSecretCode = By.xpath("//label[@class='ng-tns-c46-5 ng-star-inserted']");
-        private final By labelHolderName = By.xpath("//label[@class='ng-tns-c46-3 ng-star-inserted']");
+        private final By labelCardNumber = By.xpath("//p[@class='error-message ng-tns-c46-1 ng-star-inserted']");
+        private final By labelValidityPeriod = By.xpath("//p[@class='error-message ng-tns-c46-4 ng-star-inserted']");
+        private final By labelSecretCode = By.xpath("//p[@class='error-message ng-tns-c46-5 ng-star-inserted']");
+        private final By labelHolderName = By.xpath("//p[@class='error-message ng-tns-c46-3 ng-star-inserted']");
 
         private final By cardBrands = By.xpath("//div[@class='icons-container ng-tns-c46-1']//img");
 
