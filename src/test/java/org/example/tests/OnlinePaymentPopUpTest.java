@@ -6,11 +6,13 @@ import org.example.lesson_16.steps.HomePageSteps;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.example.lesson_16.WebDriverInstance.webDriver;
@@ -43,6 +45,10 @@ public class OnlinePaymentPopUpTest {
         steps.switchToFramePopUp();
     }
 
+    static Stream<String> providerLogo() {
+        return Stream.of("visa-system.svg", "mastercard-system.svg", "belkart-system.svg", "mir-system-ru.svg", "maestro-system.svg");
+    }
+
     @ParameterizedTest
     @Order(1)
     @DisplayName("Прверка корректного отображения суммы в заголовке pop-up.")
@@ -57,7 +63,8 @@ public class OnlinePaymentPopUpTest {
     @DisplayName("Прверка корректного отображения телефона в заголовке pop-up")
     @CsvSource({"297777777"})
     public void testPhoneNumber(String phoneNumber) {
-        boolean contains = steps.getTextPopUp().contains(phoneNumber);
+        String textPopUp = steps.getTextPopUp();
+        boolean contains = textPopUp.contains(phoneNumber);
         assertTrue(contains);
     }
 
@@ -84,7 +91,8 @@ public class OnlinePaymentPopUpTest {
     @CsvSource({"Срок действия"})
     @Order(5)
     public void testValidityPeriodPlaceholder(String placeholder) {
-        boolean contains = steps.getValidityPeriodText().contains(placeholder);
+        String validityPeriodText = steps.getValidityPeriodText();
+        boolean contains = validityPeriodText.contains(placeholder);
         assertTrue(contains);
     }
 
@@ -98,39 +106,18 @@ public class OnlinePaymentPopUpTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"visa-system.svg"})
-    @DisplayName("Проверка логотипа Visa")
-    @Order(7)
-    public void testLogoVisa(String svg) {
-        ArrayList<String> srcCardBrands = steps.getSrcCardBrands();
-        boolean contains = srcCardBrands.contains(svg);
-        assertTrue(contains);
-    }
-
-    @ParameterizedTest
-    @CsvSource({"mastercard-system.svg"})
-    @DisplayName("Проверка логотипа Master Card")
-    @Order(8)
-    public void testLogoMasterCard(String svg) {
-        ArrayList<String> srcCardBrands = steps.getSrcCardBrands();
-        boolean contains = srcCardBrands.contains(svg);
-        assertTrue(contains);
-    }
-
-    @ParameterizedTest
-    @CsvSource({"belkart-system.svg"})
-    @DisplayName("Проверка логотипа Master Belkart")
-    @Order(9)
-    public void testLogo(String svg) {
-        ArrayList<String> srcCardBrands = steps.getSrcCardBrands();
-        boolean contains = srcCardBrands.contains(svg);
+    @DisplayName("Проверка логотипов")
+    @MethodSource("providerLogo")
+    @Order(10)
+    public void testMaestro(String cardBrand) {
+        boolean contains = isCheck(cardBrand);
         assertTrue(contains);
     }
 
     @ParameterizedTest
     @CsvSource({"2200 2407 0118 3630, 03 / 26, 200, SEMEN SEMENOV"})
     @DisplayName("Прверка корректного отображения суммы на кнопке в pop-up.")
-    @Order(10)
+    @Order(11)
     public void testTotalViewButtonPopUp(String cardNumber, String validityPeriod, String secretCode, String holderName) {
         OnlinePaymentPopUpDTO onlinePaymentPopUpDTO = OnlinePaymentPopUpDTO.builder()
                 .cardNumber(cardNumber)
@@ -141,6 +128,16 @@ public class OnlinePaymentPopUpTest {
         steps.fillPaymentPopUp(onlinePaymentPopUpDTO);
         boolean contains = steps.getTextPopUpButton().contains("200");
         assertTrue(contains);
+    }
+
+    private boolean isCheck(String cardBrand) {
+        ArrayList<String> srcCardBrands = steps.getSrcCardBrands();
+        for (String src : srcCardBrands) {
+            if (src.contains(cardBrand)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @AfterAll

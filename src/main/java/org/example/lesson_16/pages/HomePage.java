@@ -3,7 +3,6 @@ package org.example.lesson_16.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.example.lesson_16.WebDriverInstance.webDriver;
@@ -79,7 +78,7 @@ public class HomePage {
 
     public static class OnlinePaymentPopUp {
         private final By framePopUp = By.xpath("//iframe[@class='bepaid-iframe']");
-        private final By totalTitle = By.xpath("//div[@class='payment-page__order-description pay-description']//span");
+        private final By totalTitle = By.xpath("//div[@class='pay-description__cost']/span");
         private final By phoneText = By.xpath("//div[@class='pay-description__text']/span");
         private final By cardNumber = By.id("cc-number");
         private final By validityPeriod = By.xpath("//div[@class='content ng-tns-c46-4']/input");
@@ -91,7 +90,7 @@ public class HomePage {
         private final By labelSecretCode = By.xpath("//label[@class='ng-tns-c46-5 ng-star-inserted']");
         private final By labelHolderName = By.xpath("//label[@class='ng-tns-c46-3 ng-star-inserted']");
 
-        private final By cardBrands = By.xpath("//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']");
+        private final By cardBrands = By.xpath("//div[@class='icons-container ng-tns-c46-1']//img");
 
         public WebElement getFramePopUp() {
             return webDriver.findElement(framePopUp);
