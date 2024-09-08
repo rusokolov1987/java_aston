@@ -129,4 +129,24 @@ public class HomePageSteps {
         }
         return list;
     }
+
+    public void clickCardNumber() {
+        onlinePaymentPopUp.getCarNumber().click();
+    }
+
+    public void clickValidityPeriod() {
+        onlinePaymentPopUp.getValidityPeriod().click();
+    }
+
+    public void clickSecretCode() {
+        onlinePaymentPopUp.getSecretCode().click();
+    }
+
+    public void clickHolderName() {
+        onlinePaymentPopUp.getHolderName().click();
+    }
+
+    public void clickOff() {
+        onlinePaymentPopUp.getPhoneText().click();
+    }
 }

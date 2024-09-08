@@ -73,6 +73,8 @@ public class OnlinePaymentPopUpTest {
     @CsvSource({"Некорректный номер карты"})
     @Order(3)
     public void testCardNumberPlaceholder(String placeholder) {
+        steps.clickCardNumber();
+        steps.clickOff();
         boolean contains = steps.getCardNumberText().contains(placeholder);
         assertTrue(contains);
     }
@@ -82,6 +84,8 @@ public class OnlinePaymentPopUpTest {
     @CsvSource({"Введите CVC-код"})
     @Order(4)
     public void testSecretCodePlaceholder(String placeholder) {
+        steps.clickSecretCode();
+        steps.clickOff();
         boolean contains = steps.getSecretCodeText().contains(placeholder);
         assertTrue(contains);
     }
@@ -91,8 +95,9 @@ public class OnlinePaymentPopUpTest {
     @CsvSource({"Исправьте срок действия"})
     @Order(5)
     public void testValidityPeriodPlaceholder(String placeholder) {
-        String validityPeriodText = steps.getValidityPeriodText();
-        boolean contains = validityPeriodText.contains(placeholder);
+        steps.clickValidityPeriod();
+        steps.clickOff();
+        boolean contains = steps.getValidityPeriodText().contains(placeholder);
         assertTrue(contains);
     }
 
@@ -101,6 +106,8 @@ public class OnlinePaymentPopUpTest {
     @CsvSource({"Введите имя и фамилию как указано на карте"})
     @Order(6)
     public void testHolderNamePlaceholder(String placeholder) {
+        steps.clickHolderName();
+        steps.clickOff();
         boolean contains = steps.getHolderNameText().contains(placeholder);
         assertTrue(contains);
     }
