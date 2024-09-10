@@ -1,6 +1,5 @@
 package org.example.tests;
 
-import io.qameta.allure.Epic;
 import org.example.lesson_16.DTO.OnlinePaymentPageDTO;
 import org.example.lesson_16.DTO.OnlinePaymentPopUpDTO;
 import org.example.lesson_16.steps.HomePageSteps;
@@ -19,7 +18,6 @@ import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@Epic("Тестирование модального окна оплаты услуг МТС")
 public class OnlinePaymentPopUpTest {
     private static HomePageSteps steps;
     private static Actions actions;
@@ -29,11 +27,10 @@ public class OnlinePaymentPopUpTest {
         steps = new HomePageSteps();
         webDriver = getWebDriverInstance();
         webDriver.manage().window().maximize();
-        webDriver.manage().deleteAllCookies();
         webDriver.get("https://www.mts.by/");
         actions = new Actions(webDriver);
         actions.click(webDriver.findElement(By.id("cookie-agree"))).perform();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(25));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         OnlinePaymentPageDTO onlinePaymentPageDTO = OnlinePaymentPageDTO.builder()
                 .paymentType("Услуги связи")
                 .specialField("297777777")
