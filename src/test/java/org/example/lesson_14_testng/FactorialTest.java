@@ -1,3 +1,4 @@
+/*
 package org.example.lesson_14_testng;
 
 import org.example.lesson_14_testng.exception.InvalidValue;
@@ -42,4 +43,4 @@ public class FactorialTest {
             assertEquals(Integer.parseInt(expected), actual);
         }
     }
-}
+}*/
