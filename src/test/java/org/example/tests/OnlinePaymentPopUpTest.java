@@ -15,6 +15,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -81,29 +82,27 @@ public class OnlinePaymentPopUpTest {
     @MethodSource("providerPlaceholder")
     @Order(2)
     public void testPlaceholder(String placeholder) {
-        boolean contains = false;
         switch (placeholder) {
             case "Некорректный номер карты":
                 steps.clickCardNumber();
                 steps.clickOff();
-                contains = steps.getCardNumberText().equals(placeholder);
+                assertEquals(placeholder, steps.getCardNumberText());
                 break;
             case "Исправьте срок действия":
                 steps.clickValidityPeriod();
                 steps.clickOff();
-                contains = steps.getValidityPeriodText().equals(placeholder);
+                assertEquals(placeholder, steps.getValidityPeriodText());
                 break;
             case "Введите CVC-код":
                 steps.clickSecretCode();
                 steps.clickOff();
-                contains = steps.getSecretCodeText().equals(placeholder);
+                assertEquals(placeholder, steps.getSecretCodeText());
                 break;
             case "Введите имя и фамилию как указано на карте":
                 steps.clickHolderName();
                 steps.clickOff();
-                contains = steps.getHolderNameText().equals(placeholder);
+                assertEquals(placeholder, steps.getHolderNameText());
         }
-        assertTrue(contains);
     }
 
     @ParameterizedTest
