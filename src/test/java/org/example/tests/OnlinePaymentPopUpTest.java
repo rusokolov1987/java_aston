@@ -1,5 +1,6 @@
 package org.example.tests;
 
+import io.qameta.allure.Feature;
 import org.example.lesson_16.DTO.OnlinePaymentPageDTO;
 import org.example.lesson_16.DTO.OnlinePaymentPopUpDTO;
 import org.example.lesson_16.steps.HomePageSteps;
@@ -18,6 +19,7 @@ import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Feature("Тест модального окна оплаты услуг")
 public class OnlinePaymentPopUpTest {
     private static HomePageSteps steps;
     private static Actions actions;
@@ -30,7 +32,6 @@ public class OnlinePaymentPopUpTest {
         webDriver.get("https://www.mts.by/");
         actions = new Actions(webDriver);
         actions.click(webDriver.findElement(By.id("cookie-agree"))).perform();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         OnlinePaymentPageDTO onlinePaymentPageDTO = OnlinePaymentPageDTO.builder()
                 .paymentType("Услуги связи")
                 .specialField("297777777")
@@ -41,6 +42,7 @@ public class OnlinePaymentPopUpTest {
         steps.clickDropdownButton();
         steps.fillPaymentPage(onlinePaymentPageDTO);
         steps.clickButton();
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         steps.switchToFramePopUp();
     }
 
@@ -84,22 +86,22 @@ public class OnlinePaymentPopUpTest {
             case "Некорректный номер карты":
                 steps.clickCardNumber();
                 steps.clickOff();
-                contains = steps.getCardNumberText().contains(placeholder);
+                contains = steps.getCardNumberText().equals(placeholder);
                 break;
             case "Исправьте срок действия":
                 steps.clickValidityPeriod();
                 steps.clickOff();
-                contains = steps.getValidityPeriodText().contains(placeholder);
+                contains = steps.getValidityPeriodText().equals(placeholder);
                 break;
             case "Введите CVC-код":
                 steps.clickSecretCode();
                 steps.clickOff();
-                contains = steps.getSecretCodeText().contains(placeholder);
+                contains = steps.getSecretCodeText().equals(placeholder);
                 break;
             case "Введите имя и фамилию как указано на карте":
                 steps.clickHolderName();
                 steps.clickOff();
-                contains = steps.getHolderNameText().contains(placeholder);
+                contains = steps.getHolderNameText().equals(placeholder);
         }
         assertTrue(contains);
     }
