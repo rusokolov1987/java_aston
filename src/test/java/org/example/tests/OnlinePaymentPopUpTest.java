@@ -1,5 +1,6 @@
 package org.example.tests;
 
+import io.qameta.allure.Epic;
 import org.example.lesson_16.DTO.OnlinePaymentPageDTO;
 import org.example.lesson_16.DTO.OnlinePaymentPopUpDTO;
 import org.example.lesson_16.steps.HomePageSteps;
@@ -18,6 +19,7 @@ import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.example.lesson_16.WebDriverInstance.webDriver;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Epic("Тестирование модального окна оплаты услуг МТС")
 public class OnlinePaymentPopUpTest {
     private static HomePageSteps steps;
     private static Actions actions;
