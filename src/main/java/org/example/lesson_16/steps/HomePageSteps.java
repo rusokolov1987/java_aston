@@ -6,6 +6,7 @@ import org.example.lesson_16.pages.HomePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 import static org.example.lesson_16.WebDriverInstance.webDriver;

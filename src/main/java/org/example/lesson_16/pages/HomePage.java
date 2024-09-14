@@ -2,7 +2,10 @@ package org.example.lesson_16.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.example.lesson_16.WebDriverInstance.webDriver;
@@ -125,6 +128,8 @@ public class HomePage {
         }
 
         public WebElement getLabelCardNumber() {
+            WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofMillis(10000));
+            wait.until(ExpectedConditions.textToBePresentInElement(webDriver.findElement(labelCardNumber), "Некорректный номер карты"));
             return webDriver.findElement(labelCardNumber);
         }
 

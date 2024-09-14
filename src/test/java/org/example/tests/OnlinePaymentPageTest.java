@@ -1,5 +1,6 @@
 package org.example.tests;
 
+import io.qameta.allure.Feature;
 import org.example.lesson_16.DTO.OnlinePaymentPageDTO;
 import org.example.lesson_16.steps.HomePageSteps;
 import org.junit.jupiter.api.AfterAll;
@@ -17,6 +18,7 @@ import static org.example.lesson_16.WebDriverInstance.webDriver;
 import static org.example.lesson_16.WebDriverInstance.getWebDriverInstance;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Feature("Тестирование блока онлайн оплаты услуг")
 public class OnlinePaymentPageTest {
     private static HomePageSteps steps;
     private static Actions actions;
@@ -29,7 +31,7 @@ public class OnlinePaymentPageTest {
         webDriver.get("https://www.mts.by/");
         actions = new Actions(webDriver);
         actions.click(webDriver.findElement(By.id("cookie-agree"))).perform();
-        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         steps.scrollToPaymentSection();
     }
 
